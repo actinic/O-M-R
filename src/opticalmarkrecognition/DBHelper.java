@@ -14,6 +14,7 @@ package opticalmarkrecognition;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -197,6 +198,19 @@ public class DBHelper {
             num = "-1";
         }
     return productCode;
+    }
+
+    String tableExist(String tableName) throws SQLException {
+        //String tableName = "sushila";
+        tableName = tableName.toUpperCase();
+        DatabaseMetaData dbm = conn.getMetaData();
+        // check if "employee" table is there
+        ResultSet tables = dbm.getTables(null, null, tableName, null);
+        if (tables.next()) {
+        return "true";
+        }else {
+        return "false";
+        }
     }
 
     

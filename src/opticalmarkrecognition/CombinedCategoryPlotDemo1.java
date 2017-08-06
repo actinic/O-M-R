@@ -52,6 +52,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -86,6 +87,7 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
         JPanel chartPanel = createDemoPanel();
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
         setContentPane(chartPanel);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }  
 
     
@@ -289,6 +291,7 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);
+        //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE)
     }
 
 }

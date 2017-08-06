@@ -18,6 +18,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author sushil
  */
 public class browseFrom extends javax.swing.JFrame {
+    String exist =null;
 
     /**
      * Creates new form browseFrom
@@ -27,6 +28,11 @@ public class browseFrom extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
+    public browseFrom(String existing) {
+        initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.exist = existing;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -146,7 +152,7 @@ public class browseFrom extends javax.swing.JFrame {
         File f = chooser.getSelectedFile();
         String filename = f.getAbsolutePath();
         browse bro = new browse();
-        new browse(filename).setVisible(true); 
+        new browse(filename,exist).setVisible(true); 
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -50,6 +50,14 @@ public class browse extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         projectName.setText(filename);
     }
+    
+    browse(String filename,String filename1) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);        
+        ipath.setText(filename);
+        projectName.setText(filename1);
+    }
         
 
     /**
@@ -284,20 +292,47 @@ public class browse extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int s=0;
         String projName = projectName.getText();
-        if(!"".equals(projName)){
+        imagePath = ipath.getText();
+        File file = new File("C:\\Users\\sushil\\Documents\\NetBeansProjects\\OpticalMarkRecognition\\Storage\\");
+        String[] names = file.list();
+        String files[] = new String[50];
+        int i = 0;
+        for(String name : names)
+        {
+            if (new File("C:\\Users\\sushil\\Documents\\NetBeansProjects\\OpticalMarkRecognition\\Storage\\" + name).isDirectory())
+            {
+                files[i]=name;
+                i++;
+            }
+        }
+        for(int j=0;j<=i-1;j++){
+        if(projName.equals(files[j])){
+        s=1;
+        System.out.println(files[j]+" file found " +s);
+        break;
+        }else{
+        System.out.println(files[j]+" file not found");
+        s=0;
+        }
+        }
+        System.out.println(s);
+        
+        if(!"".equals(projName) && s!=1 && !"".equals(imagePath)){
         new File("Storage/"+projName).mkdirs();
         filePath = "Storage/"+projName+"/"+projName;
-        imagePath = ipath.getText();
+        
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
         jButton3.setEnabled(false);
         jButton4.setEnabled(false);
+        jButton5.setEnabled(false);
         taskk = new browse.Taskk();
         taskk.execute();
         }else{
         //System.out.println("Enter ProjectName");
-        JOptionPane.showMessageDialog(null,"Enter ProjectName");
+        JOptionPane.showMessageDialog(null,"Enter ProjectName or file already exist or enter pic ");
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -319,9 +354,10 @@ public class browse extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
         projName = projectName.getText();
-        if(!"".equals(projName)){
+        imagePath = ipath.getText();
+        if(!"".equals(projName) && !"".equals(imagePath)){
         filePath = "Storage/"+projName+"/"+projName;
-        imagePath = ipath.getText();        
+                
         //ProcessForm pf = new ProcessForm(imagePath,filePath,projName);
         //ProgressBarDemo pbd = new ProgressBarDemo();
         //
@@ -329,21 +365,27 @@ public class browse extends javax.swing.JFrame {
         jButton2.setEnabled(false);
         jButton3.setEnabled(false);
         jButton4.setEnabled(false);
-        
+        jButton5.setEnabled(false);
         task = new browse.Task();
         task.execute();
         //
         
         myTable.setModel(DbUtils.resultSetToTableModel(dbh.returnResultTotal(projName)));
         }else{
-            JOptionPane.showMessageDialog(null,"Enter ProjectName");
+            JOptionPane.showMessageDialog(null,"Enter ProjectName or empty pic");
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String existing = projectName.getText();
+        if(existing==null){
         new browseFrom().setVisible(true);
         this.dispose();
+        }else{
+        new browseFrom(existing).setVisible(true);
+        this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void projectNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectNameActionPerformed
@@ -354,10 +396,12 @@ public class browse extends javax.swing.JFrame {
 
             try {
                 projName = projectName.getText();
-                if(!"".equals(projName)){
+                String res = dbh.tableExist(projName);
+                System.out.println(res);
+                if(!"".equals(projName) && !"false".equals(res)){
                 CombinedCategoryPlotDemo1.start(projName);
                 }else{
-                    JOptionPane.showMessageDialog(null,"Enter ProjectName");
+                    JOptionPane.showMessageDialog(null,"Tabel not found for "+projName);
                 }
             } catch (SQLException | IOException ex) {
                 Logger.getLogger(browse.class.getName()).log(Level.SEVERE, null, ex);
@@ -444,6 +488,7 @@ class Task extends SwingWorker<Void, Void> {
         jButton2.setEnabled(true);
         jButton3.setEnabled(true);
         jButton4.setEnabled(true);
+        jButton5.setEnabled(true);
         }
     }
 
@@ -467,6 +512,7 @@ class Taskk extends SwingWorker<Void, Void> {
         jButton2.setEnabled(true);
         jButton3.setEnabled(true);
         jButton4.setEnabled(true);
+        jButton5.setEnabled(true);
         }
     }
     

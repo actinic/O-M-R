@@ -23,19 +23,8 @@ public class test {
     
     
     public static void main(String[] args) throws IOException, SQLException  {
-        File file = new File("C:\\Users\\sushil\\Documents\\NetBeansProjects\\OpticalMarkRecognition\\Storage\\");
-        String[] names = file.list();
-        String files[] = new String[50];
-        int i = 0;
-        for(String name : names)
-        {
-            if (new File("C:\\Users\\sushil\\Documents\\NetBeansProjects\\OpticalMarkRecognition\\Storage\\" + name).isDirectory())
-            {
-                files[i]=name;
-                System.out.println(i+" "+files[i] +" "+ name);
-                i++;
-            }
-        }
-                
+        DBHelper dbh = new DBHelper();
+        String res = dbh.tableExist("sushil");
+        System.out.println(res);
     }
 }

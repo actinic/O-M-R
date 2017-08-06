@@ -34,7 +34,7 @@ public class main extends javax.swing.JFrame {
         for(int j=0;j<=i-1;j++){
         allfiles[j] = files[j];
         }
-        String[] items = {"Item A", "Item B", "Item C"};
+        //String[] items = {"Item A", "Item B", "Item C"};
         combo.setModel(new javax.swing.DefaultComboBoxModel(allfiles));        
     }
 
