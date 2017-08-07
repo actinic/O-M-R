@@ -41,6 +41,7 @@
 package opticalmarkrecognition;
 
 import java.awt.Font;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -54,6 +55,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
@@ -81,15 +83,21 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
     int info[] = new int[50];
     int infoo[] = new int[50];
     int count=0;
-    static String filename;
+    String filename;
     public CombinedCategoryPlotDemo1(String title) throws SQLException, IOException {
         super(title);
         JPanel chartPanel = createDemoPanel();
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        //chartPanel.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(chartPanel);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
     }  
 
+    
+    @Override
+        public void windowClosing(WindowEvent e) {
+                dispose();
+        }
     
     /**
      * Creates a dataset.
@@ -99,7 +107,12 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
     public CategoryDataset createDataset2() throws SQLException, IOException {
         
         DefaultCategoryDataset result = new DefaultCategoryDataset();
-        String[] series = {"","first option", "second option", "third option","fourth option","fifth option","sixth option","seventh option"};       
+        
+        //String[] series = {"","first option", "second option", "third option"};       
+        String series[] = new String[50];
+        for(int i=1;i<50;i++){
+        series[i]=i+"th option";
+        }
         //String[] typee= {"","Type1", "Type2", "Type3","Type4","Type5","Type6","Type7","Type8"};
         
         ResultSet res = dbh.getXnamevalue();
@@ -276,7 +289,7 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
      *
      * @param args  ignored.
      */
-    public static void main(String[] args) throws SQLException, IOException {
+    public void main(String[] args) throws SQLException, IOException {
         String title = "Survey Result";
         CombinedCategoryPlotDemo1 demo = new CombinedCategoryPlotDemo1(title);
         demo.pack();
@@ -284,14 +297,14 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
         demo.setVisible(true);
     }
     
-    public static void start(String file) throws SQLException, IOException{
+    public void start(String file) throws SQLException, IOException{
         filename=file;
     String title = "Survey Result";
         CombinedCategoryPlotDemo1 demo = new CombinedCategoryPlotDemo1(title);
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);
-        //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE)
+        //setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }
 
 }

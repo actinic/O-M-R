@@ -42,6 +42,7 @@ public class browse extends javax.swing.JFrame {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ipath.setText(filename);
+        //myTable.setModel(DbUtils.resultSetToTableModel(dbh.returnResultTotal(filename)));
     }
     
     browse(String filename,String filename1,String filename2) {
@@ -49,6 +50,7 @@ public class browse extends javax.swing.JFrame {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         projectName.setText(filename);
+        myTable.setModel(DbUtils.resultSetToTableModel(dbh.returnResultTotal(filename)));
     }
     
     browse(String filename,String filename1) {
@@ -57,6 +59,7 @@ public class browse extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);        
         ipath.setText(filename);
         projectName.setText(filename1);
+        myTable.setModel(DbUtils.resultSetToTableModel(dbh.returnResultTotal(filename1)));
     }
         
 
@@ -289,6 +292,7 @@ public class browse extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -369,8 +373,10 @@ public class browse extends javax.swing.JFrame {
         task = new browse.Task();
         task.execute();
         //
+        //this.dispose();
+        //new browse(imagePath,projName);
+        //myTable.setModel(DbUtils.resultSetToTableModel(dbh.returnResultTotal(projName)));
         
-        myTable.setModel(DbUtils.resultSetToTableModel(dbh.returnResultTotal(projName)));
         }else{
             JOptionPane.showMessageDialog(null,"Enter ProjectName or empty pic");
         }
@@ -399,7 +405,9 @@ public class browse extends javax.swing.JFrame {
                 String res = dbh.tableExist(projName);
                 System.out.println(res);
                 if(!"".equals(projName) && !"false".equals(res)){
-                CombinedCategoryPlotDemo1.start(projName);
+                //CombinedCategoryPlotDemo1.start(projName);
+                    CombinedCategoryPlotDemo1 ccpd = new CombinedCategoryPlotDemo1(projName);
+                    ccpd.start(projName);
                 }else{
                     JOptionPane.showMessageDialog(null,"Tabel not found for "+projName);
                 }
@@ -482,13 +490,15 @@ class Task extends SwingWorker<Void, Void> {
 
         @Override
         public void done() {
-            Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(null,"done");
+        Toolkit.getDefaultToolkit().beep();
+        JOptionPane.showMessageDialog(null,"done");
         jButton1.setEnabled(true);
         jButton2.setEnabled(true);
         jButton3.setEnabled(true);
         jButton4.setEnabled(true);
         jButton5.setEnabled(true);
+        myTable.setModel(DbUtils.resultSetToTableModel(dbh.returnResultTotal(projName)));
+        //new browse(imagePath,projName).setVisible(true);
         }
     }
 
