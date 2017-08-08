@@ -83,7 +83,7 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
     int info[] = new int[50];
     int infoo[] = new int[50];
     int count=0;
-    String filename;
+    public static String filename;
     public CombinedCategoryPlotDemo1(String title) throws SQLException, IOException {
         super(title);
         JPanel chartPanel = createDemoPanel();
@@ -114,8 +114,10 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
         series[i]=i+"th option";
         }
         //String[] typee= {"","Type1", "Type2", "Type3","Type4","Type5","Type6","Type7","Type8"};
-        
-        ResultSet res = dbh.getXnamevalue();
+        String query = "select * from "+filename;
+        System.out.println("before "+query);
+        ResultSet res = dbh.getXnamevalue(filename);
+        System.out.println("after "+query);
         ResultSetMetaData metaData = res.getMetaData();
             count = metaData.getColumnCount(); //number of column
             String columnName[] = new String[count];
@@ -123,7 +125,7 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
             for (int i = 1; i <= count; i++)
             {
             columnName[i-1] = metaData.getColumnLabel(i);
-            //System.out.println(columnName[i-1]);
+            System.out.println(columnName[i-1]);
             typee[i-1]=columnName[i-1];
             
             }
@@ -133,8 +135,10 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
         try {
             if (filename==null){
                 filename = "sushil";
+                System.out.println("file not found " + filename);
             }
             inputStream = new FileReader("Storage/"+filename+"/"+filename+"f.txt");
+            System.out.println("Storage/"+filename+"/"+filename+"f.txt");
             int c;
             int i=0,j=1,n=1,f;
             String item[] = new String[50];
@@ -299,6 +303,8 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
     
     public void start(String file) throws SQLException, IOException{
         filename=file;
+        System.out.println("file name = "+filename);
+        
     String title = "Survey Result";
         CombinedCategoryPlotDemo1 demo = new CombinedCategoryPlotDemo1(title);
         demo.pack();

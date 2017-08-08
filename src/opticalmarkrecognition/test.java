@@ -6,11 +6,8 @@
 
 package opticalmarkrecognition;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 
 
@@ -23,8 +20,8 @@ public class test {
     
     
     public static void main(String[] args) throws IOException, SQLException  {
-        DBHelper dbh = new DBHelper();
-        String res = dbh.tableExist("sushil");
-        System.out.println(res);
+        String filename = "sushil";
+        String upperFilename = filename.toUpperCase();
+        System.out.println(upperFilename);
     }
 }

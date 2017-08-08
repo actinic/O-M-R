@@ -21,6 +21,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import org.apache.derby.drda.NetworkServerControl;
+import java.io.IOException;
 
 
 
@@ -136,10 +137,14 @@ public class DBHelper {
         return null;
     }
 
-    ResultSet getXnamevalue() {
+    ResultSet getXnamevalue(String filename) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     try{
-            ResultSet rs = stmt.executeQuery("select * from ROOT.SUSHIL");          
+            //String upperFilename = filename.toUpperCase();
+            System.out.println("filename ="+filename);
+            String query = "select * from "+filename;
+            System.out.println(query);
+            ResultSet rs = stmt.executeQuery("select * from defence");          
             return rs;
         }  catch(SQLException e){   
             System.out.println("Error"+e);           
@@ -189,7 +194,8 @@ public class DBHelper {
         int key=0;
         try {
             Statement statement = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-            ResultSet resultSet = statement.executeQuery("select * from sushil");
+//            ResultSet resultSet = statement.executeQuery("select * from sushil");
+            ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 productCode = resultSet.getString("id");
             }

@@ -35,6 +35,7 @@ public class ProcessTemplate {
         //image.writeAscTemplate(filePath + "s.asc");
         image.writeAscTemplate(filePath + "a.txt");
         image.writeConfig(filePath + ".config");
+        System.out.println("templete scanned");
 //        image.writeAscTemplate("2circle-org-colored-whole.asc");
 //        image.writeConfig("2circle-org-colored-whole.config");
     }    

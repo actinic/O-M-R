@@ -153,6 +153,8 @@ public class browseFrom extends javax.swing.JFrame {
         File f = chooser.getSelectedFile();
         String filename = f.getAbsolutePath();
         browse bro = new browse();
+        //if(null==exist || exist==""){exist = " ";}
+        System.out.println("exist = "+exist);
         new browse(filename,exist).setVisible(true); 
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
