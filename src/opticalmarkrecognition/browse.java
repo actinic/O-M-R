@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import net.proteanit.sql.DbUtils;
+import org.jfree.ui.RefineryUtilities;
 
 /**
  *
@@ -406,11 +407,14 @@ public class browse extends javax.swing.JFrame {
             try {
                 projName = projectName.getText();
                 String res = dbh.tableExist(projName);
-                System.out.println(res);
+                System.out.println("table esist = "+res);
                 if(!"".equals(projName) && !"false".equals(res)){
                 //CombinedCategoryPlotDemo1.start(projName);
                     CombinedCategoryPlotDemo1 ccpd = new CombinedCategoryPlotDemo1(projName);
-                    ccpd.start(projName);
+                    ccpd.pack();
+                    RefineryUtilities.centerFrameOnScreen(ccpd);
+                    ccpd.setVisible(true);
+                    //ccpd.start(projName);
                 }else{
                     JOptionPane.showMessageDialog(null,"Tabel not found for "+projName);
                 }

@@ -143,8 +143,9 @@ public class DBHelper {
             //String upperFilename = filename.toUpperCase();
             System.out.println("filename ="+filename);
             String query = "select * from "+filename;
+            //ResultSet rs = stmt.executeQuery("select * from defence");
             System.out.println(query);
-            ResultSet rs = stmt.executeQuery("select * from defence");          
+            ResultSet rs = stmt.executeQuery(query);
             return rs;
         }  catch(SQLException e){   
             System.out.println("Error"+e);           

@@ -1,42 +1,4 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
- *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
- *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
- *
- * This library is free software; you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation; either version 2.1 of the License, or
- * (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
- * License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
- * USA.
- *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
- * Other names may be trademarks of their respective owners.]
- *
- * ------------------------------
- * CombinedCategoryPlotDemo1.java
- * ------------------------------
- * (C) Copyright 2008, by Object Refinery Limited and Contributors.
- *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   ;
- *
- * Changes
- * -------
- * 05-May-2008 : Version 1 (DG);
- *
- */
+
 
 package opticalmarkrecognition;
 
@@ -83,15 +45,23 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
     int info[] = new int[50];
     int infoo[] = new int[50];
     int count=0;
-    public static String filename;
+    public String filename;
     public CombinedCategoryPlotDemo1(String title) throws SQLException, IOException {
         super(title);
+        this.filename = title;
         JPanel chartPanel = createDemoPanel();
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        chartPanel.setPreferredSize(new java.awt.Dimension(1500, 1070));
         //chartPanel.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(chartPanel);
         
     }  
+
+    /**
+     *
+     * @param projName
+     * @param projName0
+     */
+   
 
     
     @Override
@@ -107,6 +77,10 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
     public CategoryDataset createDataset2() throws SQLException, IOException {
         
         DefaultCategoryDataset result = new DefaultCategoryDataset();
+        if (filename==null){
+                filename = "defence";
+                //System.out.println("file not found " + filename);
+            }
         
         //String[] series = {"","first option", "second option", "third option"};       
         String series[] = new String[50];
@@ -115,9 +89,9 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
         }
         //String[] typee= {"","Type1", "Type2", "Type3","Type4","Type5","Type6","Type7","Type8"};
         String query = "select * from "+filename;
-        System.out.println("before "+query);
+        //System.out.println("before "+query);
         ResultSet res = dbh.getXnamevalue(filename);
-        System.out.println("after "+query);
+        //System.out.println("after "+query);
         ResultSetMetaData metaData = res.getMetaData();
             count = metaData.getColumnCount(); //number of column
             String columnName[] = new String[count];
@@ -133,10 +107,6 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
             FileReader inputStream = null;
         FileWriter outputStream = null;
         try {
-            if (filename==null){
-                filename = "sushil";
-                System.out.println("file not found " + filename);
-            }
             inputStream = new FileReader("Storage/"+filename+"/"+filename+"f.txt");
             System.out.println("Storage/"+filename+"/"+filename+"f.txt");
             int c;
@@ -293,24 +263,24 @@ public class CombinedCategoryPlotDemo1 extends ApplicationFrame {
      *
      * @param args  ignored.
      */
-    public void main(String[] args) throws SQLException, IOException {
+    /*public static void main(String[] args) throws SQLException, IOException {
         String title = "Survey Result";
         CombinedCategoryPlotDemo1 demo = new CombinedCategoryPlotDemo1(title);
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);
-    }
+    }*/
     
-    public void start(String file) throws SQLException, IOException{
+    /*public void start(String file) throws SQLException, IOException{
         filename=file;
         System.out.println("file name = "+filename);
         
-    String title = "Survey Result";
+        String title = "Survey Result";
         CombinedCategoryPlotDemo1 demo = new CombinedCategoryPlotDemo1(title);
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);
         //setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-    }
+    }*/
 
 }

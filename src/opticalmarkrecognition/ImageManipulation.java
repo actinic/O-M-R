@@ -549,7 +549,7 @@ public class ImageManipulation {
                     System.out.println(qry);
                     dbh.testing(qry);
                 }else{
-                    String qry="UPDATE "+projName+" SET "+field.getName()+" = 'invalid' WHERE id = "+lastid;
+                    String qry="UPDATE "+projName+" SET "+field.getName()+" = '' WHERE id = "+lastid;
                     System.out.println(qry);
                     dbh.testing(qry);
                 }
