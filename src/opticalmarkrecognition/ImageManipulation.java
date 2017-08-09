@@ -581,7 +581,7 @@ public class ImageManipulation {
     int ROW_CHOICE = 0, COLUMN_CHOICE = 1, GRID_CHOICE = 2;
     int SINGLE = 0, MULTIPLE = 1, COLUMN = 2, ROW = 3;
     class Field {
-        char ch;
+        char ch;//Question no
         int type, subtype;
         String name;
         String[] choices;
